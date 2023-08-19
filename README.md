@@ -1,2 +1,2 @@
-# LuxOS
-LuxOS packages, restoration files and settings
+# LuxOS - Packages
+LuxOS packages
