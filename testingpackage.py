@@ -7,5 +7,5 @@ class lux_pack:
   aditionaldata={"datalist"=[None]}
   def startscript():
     print("Testing Package loaded sucessfully!")
-
-testingvar="a"
+  class packvars:
+    testingvar="a"
