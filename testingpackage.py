@@ -7,5 +7,17 @@ class lux_pack:
   aditionaldata={"datalist"=[None]}
   def startscript():
     print("Testing Package loaded sucessfully!")
+  def pexcm(cmd, cliv):
+    splitcmd=cmd.split(" ")
+    r=1
+    if splitcmd[0] == "testingpackage":
+      try:
+        if self.splitcmd[1] == "#version":
+          print("Testing Package 1.0")
+      except:
+          print(cmd+" >> testingpackage failed."))
+    else:
+      r=0
+    return r;
   class packvars:
     testingvar="a"
