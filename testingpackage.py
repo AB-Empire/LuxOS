@@ -8,6 +8,7 @@ class lux_pack:
   def startscript():
     print("Testing Package loaded sucessfully!")
   def pexcm(cmd, cliv):
+    cliv2=cliv
     splitcmd=cmd.split(" ")
     r=1
     if splitcmd[0] == "testingpackage":
@@ -18,6 +19,6 @@ class lux_pack:
           print(cmd+" >> testingpackage failed.")
     else:
       r=0
-    return r
+    return [cliv2, r]
   class packvars:
     testingvar="a"
