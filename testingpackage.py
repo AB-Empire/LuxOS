@@ -13,8 +13,18 @@ class lux_pack:
     r=1
     if splitcmd[0] == "testingpackage":
       try:
-        if self.splitcmd[1] == "#version":
+        if splitcmd[1] == "#version":
           print("Testing Package 1.0")
+        elif splitcmd[1] == "update":
+          print("Testing Package 1.0")
+          print("To update \" testingpackage \", input")
+          print("\" fluctus packer fetch testingpackage.py \"")
+          print("On the command line interface.")
+        elif splitcmd[1] == "help":
+          print(" --- testingpackage help --- ")
+          print("testingpackage - tests the package")
+        elif splitcmd[1] == "hello":
+          print("Hello, World!")
       except:
           print(cmd+" >> testingpackage failed.")
     else:
