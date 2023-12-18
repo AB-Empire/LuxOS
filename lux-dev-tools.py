@@ -2,11 +2,14 @@
 # Extra developer tools for LuxOS. Officially created by the αβic empire.
 
 class lux_pack:
+
   name="lux-dev-tools"
   version="1.0"
   aditionaldata={"datalist":[None]}
+
   def startscript():
     print("LuxOS Developer Tools loaded sucessfully!")
+
   def pexcm(cmd, cliv):
     cliv2=cliv
     splitcmd=cmd.split(" ")
@@ -42,18 +45,32 @@ class lux_pack:
           print(cmd+" >> cliv failed.")
 
     elif splitcmd[0] == "clit" or splitcmd[0] == "clitype":
-                try:
-                  if cliv["prestige"] >= 1:
-                    if splitcmd[1] == "seetype" or splitcmd[1] == "seet" or splitcmd[1] == "stype" or splitcmd[1] == "st":
-                      print("CLIV >> type = "+cliv["type"])
-                    elif splitcmd[1] == "edittype" or splitcmd[1] == "editt" or splitcmd[1] == "etype" or splitcmd[1] == "et":
-                      cliv["type"] = input("CLIV >> type = ")
-                  else:
-                    print(cmd+" >> clit failed. You have no prestige to use it.")
-                except:
-                  print(cmd+" >> clit failed.")
+      try:
+        if cliv["prestige"] >= 1:
+          if splitcmd[1] == "seetype" or splitcmd[1] == "seet" or splitcmd[1] == "stype" or splitcmd[1] == "st":
+            print("CLIV >> type = "+cliv["type"])
+          elif splitcmd[1] == "edittype" or splitcmd[1] == "editt" or splitcmd[1] == "etype" or splitcmd[1] == "et":
+            cliv["type"] = input("CLIV >> type = ")
+        else:
+          print(cmd+" >> clit failed. You have no prestige to use it.")
+      except:
+        print(cmd+" >> clit failed.")
+
+    elif splitcmd[0] == "clip" or splitcmd[0] == "cliprestige":
+      try:
+        if cliv["prestige"] >= 2.5:
+          if splitcmd[1] == "seeprestige" or splitcmd[1] == "seep" or splitcmd[1] == "sprestige" or splitcmd[1] == "sp":
+            print("CLIV >> prestige = "+str(cliv["prestige"]))
+          elif splitcmd[1] == "editprestige" or splitcmd[1] == "editp" or splitcmd[1] == "eprestige" or splitcmd[1] == "ep":
+            cliv["prestige"] = input("CLIV >> prestige = ")
+        else:
+          print(cmd+" >> clip failed. You have no prestige to use it.")
+      except:
+        print(cmd+" >> clip failed.")
+
     else:
       r=0
     return [cliv2, r]
+
   class packvars:
     devtools="lux-dev-tools-1.0"
