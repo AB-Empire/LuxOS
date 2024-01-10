@@ -4,7 +4,7 @@
 class lux_pack:
 
   name="lux-dev-tools"
-  version="1.0"
+  version="1.1"
   aditionaldata={"datalist":[None]}
 
   def startscript():
@@ -68,9 +68,57 @@ class lux_pack:
       except:
         print(cmd+" >> clip failed.")
 
+    elif splitcmd[0] == "newo" or splitcmd[0] == "**":
+      try:
+        if cliv["prestige"] >= 2.5 or cliv["type"] == "mueq":
+          if splitcmd[1] == "var" or splitcmd[1] == "v":
+            try:
+              cliv["vars"][splitcmd[2]]
+              print(cmd+" >> newo failed. New variable is already existent.")
+            except:
+              if splitcmd[2].replace("", "!spt!").split("!spt!")[0] == "@":
+                if splitcmd[3] == "<=>":
+                  cliv["vars"][splitcmd[2]] = splitcmd[4]
+                elif splitcmd[3] == "<in":
+                  cliv["vars"][splitcmd[2]] = input("** var "+splitcmd[2]+" <=> ")
+                elif splitcmd[3] == "<=>(n)":
+                  cliv["vars"][splitcmd[2]] = float(splitcmd[4])
+                elif splitcmd[3] == "<in(n)":
+                  cliv["vars"][splitcmd[2]] = float(input("** var "+splitcmd[2]+" <=> "))
+          elif splitcmd[1] == "":
+            {}
+        else:
+          print(cmd+" >> newo failed. You have no prestige to use it.")
+      except:
+        print(cmd+" >> newo failed.")
+
+    elif splitcmd[0] == "edito" or splitcmd[0] == "***":
+      try:
+        if cliv["prestige"] >= 2.5 or cliv["type"] == "mueq":
+          if splitcmd[1] == "var" or splitcmd[1] == "v":
+            try:
+              cliv["vars"][splitcmd[2]]
+              if splitcmd[2].replace("", "!spt!").split("!spt!")[0] == "@":
+                if splitcmd[3] == "<=>":
+                  cliv["vars"][splitcmd[2]] = splitcmd[4]
+                elif splitcmd[3] == "<in":
+                  cliv["vars"][splitcmd[2]] = input("*** var "+splitcmd[2]+" <=> ")
+                elif splitcmd[3] == "<=>(n)":
+                  cliv["vars"][splitcmd[2]] = float(splitcmd[4])
+                elif splitcmd[3] == "<in(n)":
+                  cliv["vars"][splitcmd[2]] = float(input("*** var "+splitcmd[2]+" <=> "))
+            except:
+              print(cmd+" >> edito failed. Variable is not existent. / Variable could not be edited.")
+          elif splitcmd[1] == "":
+            {}
+        else:
+          print(cmd+" >> edito failed. You have no prestige to use it.")
+      except:
+        print(cmd+" >> edito failed.")
+
     else:
       r=0
     return [cliv2, r]
 
   class packvars:
-    devtools="lux-dev-tools-1.0"
+    devtools="lux-dev-tools-1.1"
