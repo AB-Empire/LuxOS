@@ -10,9 +10,8 @@ class lux_pack:
   def startscript():
     print("LuxOS Developer Tools loaded sucessfully!")
 
-  def pexcm(cmd, cliv):
+  def pexcm(cmd, splitcmd, cliv):
     cliv2=cliv
-    splitcmd=cmd.split(" ")
     r=1
     if splitcmd[0] == "dev-tools" or splitcmd[0] == "d-tools" or splitcmd[0] == "dev-t" or splitcmd[0] == "d-t":
       try:
@@ -73,18 +72,18 @@ class lux_pack:
         if cliv["prestige"] >= 2.5 or cliv["type"] == "mueq":
           if splitcmd[1] == "var" or splitcmd[1] == "v":
             try:
-              cliv["vars"][splitcmd[2]]
+              cliv["vars"][splitcmd[2].replace("#", "@")]
               print(cmd+" >> newo failed. New variable is already existent.")
             except:
-              if splitcmd[2].replace("", "!spt!").split("!spt!")[0] == "@":
+              if splitcmd[2][:1] == "#":
                 if splitcmd[3] == "<=>":
-                  cliv["vars"][splitcmd[2]] = splitcmd[4]
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = splitcmd[4].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n")
                 elif splitcmd[3] == "<in":
-                  cliv["vars"][splitcmd[2]] = input("** var "+splitcmd[2]+" <=> ")
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = input("** var "+splitcmd[2]+" <=> ")
                 elif splitcmd[3] == "<=>(n)":
-                  cliv["vars"][splitcmd[2]] = float(splitcmd[4])
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = float(eval(splitcmd[4]))
                 elif splitcmd[3] == "<in(n)":
-                  cliv["vars"][splitcmd[2]] = float(input("** var "+splitcmd[2]+" <=> "))
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = float(eval(input("** var "+splitcmd[2]+" <=> ")))
           elif splitcmd[1] == "":
             {}
         else:
@@ -97,16 +96,24 @@ class lux_pack:
         if cliv["prestige"] >= 2.5 or cliv["type"] == "mueq":
           if splitcmd[1] == "var" or splitcmd[1] == "v":
             try:
-              cliv["vars"][splitcmd[2]]
-              if splitcmd[2].replace("", "!spt!").split("!spt!")[0] == "@":
+              cliv["vars"][splitcmd[2].replace("#", "@")]
+              if splitcmd[2][:1] == "#":
                 if splitcmd[3] == "<=>":
-                  cliv["vars"][splitcmd[2]] = splitcmd[4]
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = splitcmd[4]
                 elif splitcmd[3] == "<in":
-                  cliv["vars"][splitcmd[2]] = input("*** var "+splitcmd[2]+" <=> ")
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = input("*** var "+splitcmd[2]+" <=> ")
                 elif splitcmd[3] == "<=>(n)":
-                  cliv["vars"][splitcmd[2]] = float(splitcmd[4])
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = float(eval(splitcmd[4]))
                 elif splitcmd[3] == "<in(n)":
-                  cliv["vars"][splitcmd[2]] = float(input("*** var "+splitcmd[2]+" <=> "))
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = float(eval(input("*** var "+splitcmd[2]+" <=> ")))
+                elif splitcmd[3] == "+=>":
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = cliv["vars"][splitcmd[2].replace("#", "@")] + splitcmd[4]
+                elif splitcmd[3] == "+in":
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = cliv["vars"][splitcmd[2].replace("#", "@")] + input("*** var "+splitcmd[2]+" +=> ")
+                elif splitcmd[3] == "+=>(n)":
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = cliv["vars"][splitcmd[2].replace("#", "@")] + float(eval(splitcmd[4]))
+                elif splitcmd[3] == "+in(n)":
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = cliv["vars"][splitcmd[2].replace("#", "@")] + float(eval(input("*** var "+splitcmd[2]+" +=> ")))
             except:
               print(cmd+" >> edito failed. Variable is not existent. / Variable could not be edited.")
           elif splitcmd[1] == "":
