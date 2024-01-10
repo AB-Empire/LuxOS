@@ -7,9 +7,8 @@ class lux_pack:
   aditionaldata={"datalist":[None]}
   def startscript():
     print("Testing Package loaded sucessfully!")
-  def pexcm(cmd, cliv):
+  def pexcm(cmd, splitcmd, cliv):
     cliv2=cliv
-    splitcmd=cmd.split(" ")
     r=1
     if splitcmd[0] == "testingpackage":
       try:
@@ -32,3 +31,4 @@ class lux_pack:
     return [cliv2, r]
   class packvars:
     testingvar="a"
+
