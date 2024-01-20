@@ -77,7 +77,7 @@ class lux_pack:
             except:
               if splitcmd[2][:1] == "#":
                 if splitcmd[3] == "<=>":
-                  cliv["vars"][splitcmd[2].replace("#", "@")] = splitcmd[4].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n")
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = splitcmd[4].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@")
                 elif splitcmd[3] == "<in":
                   cliv["vars"][splitcmd[2].replace("#", "@")] = input("** var "+splitcmd[2]+" <=> ")
                 elif splitcmd[3] == "<=>(n)":
@@ -99,7 +99,7 @@ class lux_pack:
               cliv["vars"][splitcmd[2].replace("#", "@")]
               if splitcmd[2][:1] == "#":
                 if splitcmd[3] == "<=>":
-                  cliv["vars"][splitcmd[2].replace("#", "@")] = splitcmd[4]
+                  cliv["vars"][splitcmd[2].replace("#", "@")] = splitcmd[4].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@")
                 elif splitcmd[3] == "<in":
                   cliv["vars"][splitcmd[2].replace("#", "@")] = input("*** var "+splitcmd[2]+" <=> ")
                 elif splitcmd[3] == "<=>(n)":
@@ -122,6 +122,9 @@ class lux_pack:
           print(cmd+" >> edito failed. You have no prestige to use it.")
       except:
         print(cmd+" >> edito failed.")
+
+    elif splitcmd[0] == "out" or splitcmd[0] == "o<":
+      print(splitcmd[1].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@"))
 
     else:
       r=0
