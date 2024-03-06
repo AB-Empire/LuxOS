@@ -18,9 +18,9 @@ class lux_pack:
     if splitcmd[0] == "dev-tools" or splitcmd[0] == "d-tools" or splitcmd[0] == "dev-t" or splitcmd[0] == "d-t":
       try:
         if splitcmd[1] == "#version":
-          print("LuxOS Developer Tools 1.0")
+          print("LuxOS Developer Tools 1.1")
         elif splitcmd[1] == "update":
-          print("LuxOS Developer Tools 1.0")
+          print("LuxOS Developer Tools 1.1")
           print("To update \" lux-dev-tools \", input")
           print("\" fluctus packer fetch lux-dev-tools.py \"")
           print("On the command line interface.")
@@ -28,12 +28,18 @@ class lux_pack:
           print(" --- testingpackage help --- ")
           print("cliv - manages the Command Line Interface Variables")
           print("clit - manages the Command Line Interface Type")
+          print("clip - manages the Command Line Interface Prestige")
+          print("newo - creates a new Command Line Interface variable")
+          print("edito - edits a Command Line Interface variable")
+          print("out - outputs a text value")
+          print("rd - reads a system data file")
+          print("wd - overwrites a system data file")
       except:
           print(cmd+" >> dev-tools failed.")
 
     elif splitcmd[0] == "cliv" or splitcmd[0] == "clivars":
         try:
-          if cliv["prestige"] >= 1:
+          if cliv["prestige"] >= 2.5:
             if splitcmd[1] == "seevar" or splitcmd[1] == "seev" or splitcmd[1] == "svar" or splitcmd[1] == "sv":
                 print(f"CLIV >> vars >> {splitcmd[2]} = {cliv['vars'][splitcmd[2]]}")
             elif splitcmd[1] == "editvar" or splitcmd[1] == "editv" or splitcmd[1] == "evar" or splitcmd[1] == "ev":
@@ -126,20 +132,47 @@ class lux_pack:
         print(cmd+" >> edito failed.")
 
     elif splitcmd[0] == "out" or splitcmd[0] == "o<":
-      print(splitcmd[1].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@")).replace(r"%sc%", r"%")
+      print(splitcmd[1].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@").replace(r"%sc%", r"%"))
 
-    elif splitcmd[0] == "rd" or splitcmd[0] == "readd" or splitcmd[0] == "rdata": # $#cmd lux command
+    elif splitcmd[0] == "rd" or splitcmd[0] == "readd" or splitcmd[0] == "rdata":
         try:
-            if splitcmd[1][0] == "#":
+          if cliv["prestige"] >= 2.5:
                 tempvar = open(data.system["luxoslocation.data"]+"/data/"+splitcmd[1].replace(".","/")+".data", "r", encoding='utf-8').read()
-                print("START DATA  [ "+splitcmd[1].replace("#","")+" ]")
+                print("START DATA  [ "+splitcmd[1]+" ]")
                 print(tempvar)
-                print("END   DATA  [ "+splitcmd[1].replace("#","")+" ]")
+                print("END   DATA  [ "+splitcmd[1]+" ]")
                 print("Lines:      "+str(len(tempvar.split("\n"))))
                 print("Characters: "+str(len(tempvar.replace("", "%||").split("%||"))-2))
-
+          else:
+            print(cmd+" >> rd failed. You have no prestige to use it.")
         except:
             print(cmd+" >> rd failed.")
+
+      elif splitcmd[0] == "wd" or splitcmd[0] == "writed" or splitcmd[0] == "wdata":
+        try:
+          if cliv["prestige"] >= 2.5:
+                tempvar = open(data.system["luxoslocation.data"]+"/data/"+splitcmd[1].replace(".","/")+".data", "r", encoding='utf-8').read()
+                print("START DATA  [ "+splitcmd[1]+" ]")
+                print(tempvar)
+                print("END   DATA  [ "+splitcmd[1]+" ]")
+                print("Lines:      "+str(len(tempvar.split("\n"))))
+                print("Characters: "+str(len(tempvar.replace("", "%||").split("%||"))-2))
+                print("START D2Ow  [ "+splitcmd[1]+" ]")
+                tempvar2 = input("").replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@").replace(r"%sc%", r"%")
+                open(data.system["luxoslocation.data"]+"/data/"+splitcmd[1].replace(".","/")+".data", "w", encoding='utf-8').write(tempvar2)
+                print("END   D2Ow  [ "+splitcmd[1]+" ]")
+                print("Lines:      "+str(len(tempvar2.split("\n"))))
+                print("Characters: "+str(len(tempvar2.replace("", "%||").split("%||"))-2))
+                tempvar3 = open(data.system["luxoslocation.data"]+"/data/"+splitcmd[1].replace(".","/")+".data", "r", encoding='utf-8').read()
+                print("START NEWDT [ "+splitcmd[1]+" ]")
+                print(tempvar3)
+                print("END   NEWDT [ "+splitcmd[1]+" ]")
+                print("Lines:      "+str(len(tempvar3.split("\n"))))
+                print("Characters: "+str(len(tempvar3.replace("", "%||").split("%||"))-2))
+          else:
+            print(cmd+" >> wd failed. You have no prestige to use it.")
+        except:
+            print(cmd+" >> wd failed.")
 
     else:
       r=0
