@@ -1,4 +1,4 @@
-# Developer Tools for LuxOS 1.1 (06032024a)
+# Developer Tools for LuxOS 1.0 (v.06032024a)
 # Extra developer tools for LuxOS. Officially created by the αβic empire.
 
 import data
