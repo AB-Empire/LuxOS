@@ -1,6 +1,8 @@
 # Developer Tools for LuxOS 1.0
 # Extra developer tools for LuxOS. Officially created by the αβic empire.
 
+import data
+
 class lux_pack:
 
   name="lux-dev-tools"
@@ -124,7 +126,20 @@ class lux_pack:
         print(cmd+" >> edito failed.")
 
     elif splitcmd[0] == "out" or splitcmd[0] == "o<":
-      print(splitcmd[1].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@"))
+      print(splitcmd[1].replace(r"%%%", r"%sc%").replace(r"%%", " ").replace(r"%nl%", "\n").replace(r"%#%", "@")).replace(r"%sc%", r"%")
+
+    elif splitcmd[0] == "rd" or splitcmd[0] == "readd" or splitcmd[0] == "rdata": # $#cmd lux command
+        try:
+            if splitcmd[1][0] == "#":
+                tempvar = open(data.system["luxoslocation.data"]+"/data/"+splitcmd[1].replace(".","/")+".data", "r", encoding='utf-8').read()
+                print("START DATA  [ "+splitcmd[1].replace("#","")+" ]")
+                print(tempvar)
+                print("END   DATA  [ "+splitcmd[1].replace("#","")+" ]")
+                print("Lines:      "+str(len(tempvar.split("\n"))))
+                print("Characters: "+str(len(tempvar.replace("", "%||").split("%||"))-2))
+
+        except:
+            print(cmd+" >> rd failed.")
 
     else:
       r=0
